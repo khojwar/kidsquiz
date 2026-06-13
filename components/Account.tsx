@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { View, Alert, TextInput, Text, TouchableOpacity } from 'react-native'
 import { appStyles } from '../styles/styles'
+import { useRouter } from 'expo-router';
 
 // ...
 
@@ -12,6 +13,8 @@ export default function Account({ userId, email }: { userId: string; email?: str
   const [website, setWebsite] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
   const styles = appStyles
+
+  const router = useRouter();
 
   useEffect(() => {
     if (userId) getProfile()
@@ -76,6 +79,21 @@ export default function Account({ userId, email }: { userId: string; email?: str
     }
   }
 
+
+      async function onSignOutButtonPress() {
+  
+      console.debug('SignOutButton - render')
+      const { error } = await supabase.auth.signOut()
+  
+      if (error) {
+          console.error('Error signing out:', error)
+      } else {
+          Alert.alert('Signed out successfully')
+          // Optionally, you can navigate the user back to the sign-in screen here
+          router.push('/')
+      }
+  }
+
   return (
     <View style={styles.container}>
       <View>
@@ -118,7 +136,7 @@ export default function Account({ userId, email }: { userId: string; email?: str
       </View>
 
       <View style={styles.verticallySpaced}>
-        <TouchableOpacity style={styles.button} onPress={() => supabase.auth.signOut()}>
+        <TouchableOpacity style={styles.button} onPress={onSignOutButtonPress}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </TouchableOpacity>
       </View>

@@ -1,6 +1,11 @@
-import { Link, Stack } from 'expo-router'
-import { StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from 'react-native'
+import { Link, Stack, useRouter } from 'expo-router'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, PanResponder } from 'react-native'
 import GoogleSignInButton from '@/components/social-auth-buttons/google/google-sign-in-button';
+ import { SafeAreaView } from 'react-native-safe-area-context';
+
+import BobbingImage from '@/components/BobbingImage';
+import sproutOwl from '../assets/images/sprout-owl.png';
+
 
 export default function LoginScreen() {
   return (
@@ -10,21 +15,16 @@ export default function LoginScreen() {
         <View style={styles.container}>
 
           {/* Settings icon */}
-          <TouchableOpacity style={styles.settingsBtn}>
+          {/* <TouchableOpacity style={styles.settingsBtn}>
             <Text style={styles.settingsIcon}>⚙️</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          {/* Owl mascot card */}
-          <View style={styles.mascotCard}>
-            <Image
-              source={require('@/assets/images/sprout-owl.png')}
-              style={styles.mascotImage}
-              resizeMode="contain"
-            />
-          </View>
 
-          {/* App name */}
-          <Text style={styles.appName}>Sprout</Text>
+          <BobbingImage 
+            source={sproutOwl } 
+            size={200} 
+          />
+
 
           {/* Headline */}
           <Text style={styles.headline}>Let's Learn & Play!</Text>
@@ -37,19 +37,15 @@ export default function LoginScreen() {
           {/* Buttons */}
           <View style={styles.buttonsContainer}>
             <GoogleSignInButton />
-
-            <TouchableOpacity style={styles.getStartedBtn} activeOpacity={0.85}>
-              <Text style={styles.getStartedText}>GET STARTED</Text>
-            </TouchableOpacity>
           </View>
 
           {/* Sign in link */}
-          <View style={styles.signInRow}>
+          {/* <View style={styles.signInRow}>
             <Text style={styles.signInText}>Already have an account? </Text>
             <Link href="/sign-in">
               <Text style={styles.signInLink}>Sign In</Text>
             </Link>
-          </View>
+          </View> */}
 
         </View>
       </SafeAreaView>

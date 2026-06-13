@@ -45,5 +45,7 @@ app-example
 
 # claude local settings
 .claude/settings.local.json
+.claude/settings.local.ts
+CLAUDE.md
 
 
